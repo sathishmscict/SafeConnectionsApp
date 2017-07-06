@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icon_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_products"
+            android:icon="@drawable/icon_products"
+            android:title="Products" />
+
+
+        <item
+            android:id="@+id/nav_complaints"
+            android:icon="@drawable/icon_complaints"
+            android:title="My Complaints" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/icon_userlogo"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/nav_quotation"
+            android:icon="@drawable/icon_quotation"
+            android:title="Quotation" />
+        <item
+            android:id="@+id/nav_refer_a_friend"
+            android:icon="@drawable/icon_refer_a_friend"
+            android:title="Refer a friend" />
+        <item
+            android:id="@+id/nav_referal_list"
+            android:icon="@drawable/icon_referral_list"
+            android:title="My Referal" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/icon_logout"
+            android:title="Logout" />
+
+
+    </group>
+
+
+</menu>

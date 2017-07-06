@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.safeconnectionsapp.MainActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp"
+    tools:showIn="@layout/activity_main_activity">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+
+        android:layout_margin="16dp"
+
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="vertical"
+
+
+            >
+
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.98"
+                android:background="@color/white"
+
+                >
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+
+                    android:layout_gravity="center"
+                    android:layout_margin="30dp"
+
+
+                    android:src="@drawable/app_logo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llComplain"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+
+                android:orientation="vertical">
+
+                <ImageView
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:layout_weight="0.4"
+
+
+                    android:src="@drawable/img_complain"
+                    android:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@color/logo_grey"
+                    android:gravity="center"
+
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/str_complaints"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llQuotation"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+
+                android:orientation="vertical">
+
+                <ImageView
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:layout_weight="0.4"
+
+
+                    android:src="@drawable/img_quotationm"
+                    android:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:background="@color/logo_grey"
+                    android:gravity="center"
+                    android:text="@string/str_quotation"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

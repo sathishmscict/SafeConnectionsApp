@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/llCOD"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvClose"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSecondaryText"
+            android:drawableRight="@android:drawable/ic_menu_close_clear_cancel"
+            android:gravity="center|left"
+            android:paddingLeft="8dp"
+            android:text="Verify Order"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/tvDescr"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginRight="30dp"
+            android:text="We have sent an OTP to ******3143. Please enter it to continue"
+
+            />
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounder_corner_grey"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/edtOTPWrapper"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center|left">
+
+                <EditText
+                    android:id="@+id/edtOTP"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+
+                    android:gravity="center|left"
+                    android:hint="Enter OTP"
+                    android:inputType="numberSigned"
+                    android:maxLength="4"
+                    android:paddingLeft="4dp"
+                    android:singleLine="true"/>
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnVerify"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorSecondaryText"
+                android:text="Verify Code"
+                android:textColor="#FFFFFF" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtsmsdescr"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="left"
+
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall"
+
+            android:textColor="@color/colorSecondaryText"
+
+            />
+
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimary"
+            android:layout_height="2dp"
+            android:layout_weight="1" />
+
+
+        <TextView
+            android:id="@+id/txtResendCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:singleLine="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:text="Resend Code"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+</LinearLayout>

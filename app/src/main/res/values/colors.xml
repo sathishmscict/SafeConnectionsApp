@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#E77843</color>
+    <color name="colorPrimaryDark">#E64A19</color>
+    <color name="colorAccent">#3F51B5</color>
+    <color name="colorLight">#FFCCBC</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorIcons">#FFFFFF</color>
+    <color name="colorDivider">#BDBDBD</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="logo_grey">#615D5C</color>
+
+    <color name="blue">#004780</color>
+    <color name="yellow">#F5AA2A</color>
+    <color name="red">#FF0000</color>
+
+
+    <color name="colorPrimaryLight">#51991936</color>
+
+    <color name="nhc_price_text_color">#38255A</color>
+
+    <color name="payu_blue">#368ecd</color>
+    <color name="nhc_text_color">#333333</color>
+</resources>

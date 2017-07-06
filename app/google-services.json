@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "309295577758",
+    "firebase_url": "https://safeconnectionsapp.firebaseio.com",
+    "project_id": "safeconnectionsapp",
+    "storage_bucket": "safeconnectionsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309295577758:android:fcd0d8a8595a62cf",
+        "android_client_info": {
+          "package_name": "com.safeconnectionsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309295577758-hekn3essl93e3sudktgo6eajlqn50bt6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.safeconnectionsapp",
+            "certificate_hash": "86ad2cb1eb05d558035a594618f802175ff9f7c9"
+          }
+        },
+        {
+          "client_id": "309295577758-0gj16f4tb65mj86856hsdcbs86lgocf1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3TW5DNVuRrx7lmP-yLhY6jOoBGw--ox0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309295577758-0gj16f4tb65mj86856hsdcbs86lgocf1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

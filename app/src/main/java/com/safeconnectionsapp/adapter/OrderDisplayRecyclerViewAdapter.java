@@ -3,6 +3,7 @@ package com.safeconnectionsapp.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.safeconnectionsapp.R;
 
+import com.safeconnectionsapp.pojo.ComplaintAndQuotaionMaster;
 import com.safeconnectionsapp.pojo.OrderMaster;
 import com.safeconnectionsapp.session.SessionManager;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,7 +37,7 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
     private final Context context;
     private final LayoutInflater inflater;
     private final SessionManager sessionManager;
-    private HashMap<String, String> userDetails= new HashMap<String, String>();
+    private HashMap<String, String> userDetails = new HashMap<String, String>();
 
 
     ArrayList<OrderMaster> listOrderData;
@@ -48,8 +52,6 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
         userDetails = sessionManager.getSessionDetails();
 
 
-
-
     }
 
 
@@ -58,10 +60,8 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
         private final Button btnTrack;
         private final ImageView imgItem;
         private final TextView txtItemName;
-
-
-
-        private final TextView tvDescr;
+        private final TextView txtItemPrice;
+        private final TextView txtQuantity;
 
 
         //private final EditText edtOrderId;
@@ -75,12 +75,8 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
             btnTrack = (Button) itemView.findViewById(R.id.btnTrack);
             imgItem = (ImageView) itemView.findViewById(R.id.imgItem);
             txtItemName = (TextView) itemView.findViewById(R.id.txtItemName);
-
-
-            tvDescr = (TextView)itemView.findViewById(R.id.tvDescr);
-
-
-
+            txtItemPrice = (TextView) itemView.findViewById(R.id.txtItemPrice);
+            txtQuantity = (TextView) itemView.findViewById(R.id.txtQuantity);
 
 
         }
@@ -89,7 +85,7 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.row_single_complaint, parent, false);
+        View view = inflater.inflate(R.layout.row_single_order, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
 
         return viewHolder;
@@ -101,10 +97,6 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
         OrderMaster cm = listOrderData.get(position);
 
 
-
-        holder.tvDescr.setText(cm.getComplaintdescr());
-
-
         try {
             /*DateFormat originalFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
             DateFormat targetFormat = new SimpleDateFormat("yyyyMMdd");
@@ -114,16 +106,13 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
             //DateFormat originalFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
             DateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy");
-            Date date = originalFormat.parse(cm.getComplaintDate());
+            Date date = originalFormat.parse(cm.getOrderdate());
             String formattedDate = targetFormat.format(date);  // 20120821
 
             holder.txtOrderDate.setText(Html.fromHtml("DATE : <b>" + formattedDate + "</b>"));
-            holder.txtOrderId.setText(Html.fromHtml("ORDER ID : <b>" + cm.getComplaintId() + "    "+ formattedDate +"</b>"));
+            holder.txtOrderId.setText(Html.fromHtml("ORDER ID : <b>" + cm.getOrderid() + "    " + formattedDate + "</b>"));
 
-            holder.txtOrderId.setText(formattedDate+" ( Order ID : " + cm.getComplaintId() + ")");
-
-
-
+            holder.txtOrderId.setText(formattedDate + " ( Order ID : " + cm.getOrderid() + ")");
 
 
         } catch (ParseException e) {
@@ -131,20 +120,21 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
         }
 
 
-       /* try {
+        /*try {
 
-            holder.txtOrderStatus.setText(Html.fromHtml("STATUS : <b><font color='#4CAF50'>"+ dbhandler.getOrderStatusNameByStatusId(Integer.parseInt(cm.getOrder_status())) +"</font></b>"));
+            holder.txtOrderStatus.setText(Html.fromHtml("STATUS : <b><font color='#4CAF50'>" + dbhandler.getOrderStatusNameByStatusId(Integer.parseInt(cm.getOrder_status())) + "</font></b>"));
 
         } catch (NumberFormatException e) {
             holder.txtOrderStatus.setText("STATUS : ");
             e.printStackTrace();
-        }
+        }*/
+        holder.txtOrderStatus.setVisibility(View.GONE);
 
         try {
-            holder.txtQuantity.setText("Quantity :"+(int)Double.parseDouble(cm.getQuantity())+"\n "+dbhandler.getCompanyNameByCompnayId(Integer.parseInt(cm.getCompanyid())));
+            holder.txtQuantity.setText("Quantity :" + (int) Double.parseDouble(cm.getProduct_qty()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
-        }*/
+        }
 
         holder.btnTrack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,35 +146,33 @@ public class OrderDisplayRecyclerViewAdapter extends RecyclerView.Adapter<OrderD
         });
 
 
-        holder.txtItemName.setText(cm.getCategoryname());
+        holder.txtItemName.setText(cm.getProductname());
 
 
+        try {
+            holder.txtItemPrice.setText(Html.fromHtml("\u20b9 <b>" + Double.parseDouble(cm.getPrice()) * Double.parseDouble(cm.getProduct_qty()) + "</b>"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
-
+        /*if (cm.getItemSize().equals("")) {
+            holder.txtItemPrice.setText(Html.fromHtml("\u20b9 <b>" + Double.parseDouble(cm.getPrice()) * Double.parseDouble(cm.getQuantity()) + "</b>"));
+        } else {
+            holder.txtItemPrice.setText(Html.fromHtml("\u20b9 <b>" + Double.parseDouble(cm.getPrice()) * Double.parseDouble(cm.getQuantity()) + "</b> | SIZE : <b>" + cm.getItemSize() + "</b>"));
+        }*/
 
 
         try {
 
 
+            Glide.with(context).load(cm.getImage()).placeholder(R.drawable.app_logo).error(R.drawable.app_logo).crossFade(R.anim.fadein, 2000).into(holder.imgItem);
+
+            //Picasso.with(context).load(cm.getImage()).placeholder(R.drawable.app_logo).error(R.drawable.app_logo).centerInside().into(holder.imgItem);
+
+            //Picasso.with(context).load(cm.getImage()).placeholder(R.drawable.app_logo).error(R.drawable.app_logo).resize(1000, 400).centerInside().into(holder.imgItem);
 
 
-
-            /*try {
-
-                if (userDetails.get(SessionManager.KEY_COMPANY_ID).equals("1")) {
-                    Glide.with(context).load(cm.getProductImageURL()).placeholder(R.drawable.nhc500).error(R.drawable.nhc500).crossFade(R.anim.fadein, 2000).into(holder.imgItem);
-                } else if (userDetails.get(SessionManager.KEY_COMPANY_ID).equals("2")) {
-                    Glide.with(context).load(cm.getProductImageURL()).placeholder(R.drawable.sa500).error(R.drawable.sa500).crossFade(R.anim.fadein, 2000).into(holder.imgItem);
-                } else if (userDetails.get(SessionManager.KEY_COMPANY_ID).equals("3")) {
-                    Glide.with(context).load(cm.getProductImageURL()).placeholder(R.drawable.se500).error(R.drawable.se500).crossFade(R.anim.fadein, 2000).into(holder.imgItem);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
-
-
-            //Log.d(TAG, "Final Image Path : " + cm.getProductImageURL());
+            Log.d(TAG, "Final Image Path : " + cm.getImage());
             //.placeholder(R.mipmap.ic_launcher)
 
 

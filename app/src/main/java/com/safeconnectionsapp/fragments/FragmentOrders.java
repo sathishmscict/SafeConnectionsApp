@@ -21,10 +21,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.safeconnectionsapp.R;
 import com.safeconnectionsapp.adapter.ComplaintsDisplayRecyclerViewAdapter;
+import com.safeconnectionsapp.adapter.OrderDisplayRecyclerViewAdapter;
 import com.safeconnectionsapp.app.MyApplication;
-
 import com.safeconnectionsapp.helper.AllKeys;
 import com.safeconnectionsapp.pojo.ComplaintAndQuotaionMaster;
+import com.safeconnectionsapp.pojo.OrderMaster;
 import com.safeconnectionsapp.session.SessionManager;
 
 import org.json.JSONArray;
@@ -36,7 +37,7 @@ import java.util.HashMap;
 import dmax.dialog.SpotsDialog;
 
 
-public class FragmentComplaints extends android.support.v4.app.Fragment {
+public class FragmentOrders extends android.support.v4.app.Fragment {
 
 
     private Context context = getActivity();
@@ -47,15 +48,15 @@ public class FragmentComplaints extends android.support.v4.app.Fragment {
     private HashMap<String, String> userDetails = new HashMap<String, String>();
 
 
-    private String TAG = FragmentComplaints.class.getSimpleName();
+    private String TAG = FragmentOrders.class.getSimpleName();
     private SpotsDialog pDialog;
 
     private RecyclerView recyclerview_orders;
-    private ComplaintsDisplayRecyclerViewAdapter adapter;
-    private ArrayList<ComplaintAndQuotaionMaster> list_OrderData = new ArrayList<ComplaintAndQuotaionMaster>();
+    private OrderDisplayRecyclerViewAdapter adapter;
+    private ArrayList<OrderMaster> list_OrderData = new ArrayList<OrderMaster>();
 
 
-    public FragmentComplaints() {
+    public FragmentOrders() {
         // Required empty public constructor
     }
 
@@ -92,8 +93,7 @@ public class FragmentComplaints extends android.support.v4.app.Fragment {
         pDialog = new SpotsDialog(getActivity());
         pDialog.setCancelable(false);
 
-        pDialog = new SpotsDialog(getActivity());
-        pDialog.setCancelable(false);
+
 
 
         sessionmanager = new SessionManager(getActivity());
@@ -121,7 +121,7 @@ public class FragmentComplaints extends android.support.v4.app.Fragment {
 
 
     private void getAllOrderDetailsFromServer() {
-        String url_getOrders = AllKeys.WEBSITE + "ViewServiceDetail?type=servicedetail&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "";
+        String url_getOrders = AllKeys.WEBSITE + "ViewOrderHistory?type=OrderHistory&clientid=" + userDetails.get(SessionManager.KEY_USER_ID) + "";
         Log.d(TAG, "URL ViewServiceDetail : " + url_getOrders);
         JsonObjectRequest str_getOrders = new JsonObjectRequest(Request.Method.GET, url_getOrders, null, new Response.Listener<JSONObject>() {
             @Override
@@ -149,13 +149,19 @@ public class FragmentComplaints extends android.support.v4.app.Fragment {
                                 JSONObject c = arr.getJSONObject(i);
 
 
-                                //  ComplaintAndQuotaionMaster(String complaintId, String categoryname, String complaintdescr, String complaintDate, String complaintTime) {
-                                ComplaintAndQuotaionMaster om = new ComplaintAndQuotaionMaster(c.getString(AllKeys.TAG_COMPLAINT_ID), c.getString(AllKeys.TAG_COMPLAINT_CATEGORYNAME), c.getString(AllKeys.TAG_DESCRIPTION), c.getString(AllKeys.TAG_DATE), c.getString(AllKeys.TAG_TIME));
+
+
+
+
+                                                                    //OrderMaster(String orderdate, String totalamount, String orderid, String productname, String product_qty, String price, String image) {
+                                OrderMaster om= new OrderMaster(c.getString(AllKeys.TAG_DATE) , c.getString(AllKeys.TAG_TOTAL_AMT),c.getString(AllKeys.TAG_ORDER_ID),c.getString(AllKeys.TAG_PRODUCT_NAME),c.getString(AllKeys.TAG_PRODUCT_QUANTITY),c.getString(AllKeys.TAG_PRODUCT_PRICE),c.getString(AllKeys.TAG_PRODUCT_IMAGE));
+
+
 
                                 list_OrderData.add(om);
 
                             }
-                            adapter = new ComplaintsDisplayRecyclerViewAdapter(getActivity(), list_OrderData);
+                            adapter = new OrderDisplayRecyclerViewAdapter(getActivity(), list_OrderData);
                             recyclerview_orders.setAdapter(adapter);
                         } else {
                             Toast.makeText(getActivity(), "No Orders Found", Toast.LENGTH_SHORT).show();

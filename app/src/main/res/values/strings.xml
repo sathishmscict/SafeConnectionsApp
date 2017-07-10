@@ -23,6 +23,8 @@
     <string name="empty_cart_message">Your Cart is empty!</string>
 
 
+    <string name="pincode_hint">Pincode</string>
+
     <!--Dashboard Related Strings-->
     <string name="str_quotation">Get Quotation</string>
     <string name="str_complaints">Register Complaint</string>
@@ -38,5 +40,7 @@
     <string name="hint_username">User Name</string>
     <string name="hint_email">User Email</string>
     <string name="hint_address">Address</string>
+    <string name="title_activity_add_complaint">AddComplaintActivity</string>
+    <string name="title_activity_add_quotation">AddQuotationActivity</string>
 
 </resources>

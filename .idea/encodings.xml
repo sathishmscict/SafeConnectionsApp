@@ -34,6 +34,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_no_internet.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_sort.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/rounder_corner_grey.xml" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/shape_calendar_date.xml" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/shape_calendar_month.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/track_button_shape.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_checkout.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_item_display.xml" charset="ISO-8859-1" />

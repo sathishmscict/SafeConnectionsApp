@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.safeconnectionsapp.MenuActivity"
-    tools:showIn="@layout/activity_menu">
-
-
+    tools:context="com.safeconnectionsapp.AddQuotationActivity"
+    tools:showIn="@layout/activity_add_quotation">
 
     <LinearLayout
         android:id="@+id/container"
@@ -38,21 +36,9 @@
 
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_menu"
+                android:id="@+id/rv_complaint_mst"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/txtnodata"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_marginTop="20dp"
-                android:text="NO DATA FOUND"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
 
         </FrameLayout>
 
@@ -61,7 +47,38 @@
         app:itemTextColor="@color/black"
         android:layout_gravity="bottom"-->
 
+        <android.support.design.widget.TextInputLayout
 
+            android:id="@+id/edtQuotationWrapper"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:gravity="center|left|top">
+
+
+            <EditText
+                android:id="@+id/edtQuotation"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+
+
+                android:background="@null"
+
+                android:gravity="center|left|top"
+                android:hint="Enter Quotation Details"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="10"
+                android:minLines="5"
+                android:paddingLeft="4dp"
+                android:paddingTop="4dp"
+                android:textColor="@color/black"
+                android:visibility="visible">
+
+
+            </EditText>
+
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btnConfirm"
@@ -69,7 +86,7 @@
             android:layout_height="50dp"
 
             android:orientation="vertical"
-            android:text="Send Complaint"
+            android:text="Request Quotation"
             android:textColor="@color/white"
 
             android:background="@color/colorAccent"
@@ -79,5 +96,7 @@
         </Button>
 
     </LinearLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

@@ -53,6 +53,8 @@ import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 
+import static com.safeconnectionsapp.R.id.fab;
+
 public class MenuActivity extends AppCompatActivity {
 
     private Context context = this;
@@ -94,6 +96,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private TextView tvVisitCharge;
     private Spinner spnQuotation;
+    private Button btnConfirm;
 
 
     @Override
@@ -103,16 +106,31 @@ public class MenuActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+      /*  final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+                if (userDetails.get(SessionManager.KEY_REQUEST_TYPE).toLowerCase().equals("complaint")) {
+
+                    Intent intent = new Intent(context, AddComplaintActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+
+                    Intent intent = new Intent(context, AddComplaintActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+
+
             }
         });
 
-        fab.setVisibility(View.GONE);
+        fab.setVisibility(View.GONE);*/
 
 
         try {
@@ -127,19 +145,52 @@ public class MenuActivity extends AppCompatActivity {
         sessionManager = new SessionManager(context);
         userDetails = sessionManager.getSessionDetails();
 
-        if (userDetails.get(SessionManager.KEY_REQUEST_TYPE).toLowerCase().equals("complaint")) {
-            setTitle(getString(R.string.str_complaints));
-        } else {
-            setTitle(getString(R.string.str_quotation));
-
-        }
 
 
         pDialog = new SpotsDialog(context);
         pDialog.setCancelable(false);
 
+
+        btnConfirm = (Button)findViewById(R.id.btnConfirm);
         txtnodata = (TextView) findViewById(R.id.txtnodata);
         rv_menu = (RecyclerView) findViewById(R.id.rv_menu);
+
+
+
+        if (userDetails.get(SessionManager.KEY_REQUEST_TYPE).toLowerCase().equals("complaint")) {
+            setTitle(getString(R.string.str_complaints));
+            btnConfirm.setText("Select Complaint Template");
+        } else {
+            btnConfirm.setText("Select Quotation Template");
+            setTitle(getString(R.string.str_quotation));
+
+        }
+
+
+        btnConfirm.setVisibility(View.GONE);
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (userDetails.get(SessionManager.KEY_REQUEST_TYPE).toLowerCase().equals("complaint")) {
+
+                    Intent intent = new Intent(context, AddComplaintActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+
+                    Intent intent = new Intent(context, AddQuotationActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+
+            }
+
+        });
 
 
         LinearLayoutManager lManger = new LinearLayoutManager(context);
@@ -156,16 +207,16 @@ public class MenuActivity extends AppCompatActivity {
                         list_menu.get(i).setSelectionstatus(false);
                     }
                     list_menu.get(position).setSelectionstatus(true);
-                    //fab.setVisibility(View.VISIBLE);
+                    btnConfirm.setVisibility(View.VISIBLE);
                     adapter.notifyDataSetChanged();
 
-                    Toast.makeText(context, "Name : " + list_menu.get(position).getMenuname() + " Id : " + list_menu.get(position).getMenuid(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Name : " + list_menu.get(position).getMenuname() + " Id : " + list_menu.get(position).getMenuid(), Toast.LENGTH_SHORT).show();
 
                     SERVICE_POSITION = position;
+                    sessionManager.setCategoryTypeAndIdDetails( list_menu.get(position).getMenuid(), list_menu.get(position).getMenuname(),"multiple");
 
 
-                    if (userDetails.get(SessionManager.KEY_REQUEST_TYPE).toLowerCase().equals("complaint"))
-                    {
+                   /* if (userDetails.get(SessionManager.KEY_REQUEST_TYPE).toLowerCase().equals("complaint")) {
 
 
                         final Dialog dialog = new Dialog(MenuActivity.this);
@@ -248,7 +299,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
                                     //String url = AllKeys.WEBSITE + "InsertServiceDetail?type=detail&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "&serviceid=" + list_menu.get(position).getMenuid() + "&date=" + AllKeys.convertEncodedString(AllKeys.getDateTime()) + "&description=" + AllKeys.convertEncodedString(edtComplaint.getText().toString()) + "&emailid=" + AllKeys.convertEncodedString(edtEmail.getText().toString()) + "";
-                                    String url = AllKeys.WEBSITE + "InsertServiceDetail?type=detail&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "&serviceid=" + list_menu.get(position).getMenuid() + "&date=" + AllKeys.convertEncodedString(AllKeys.getDateTime()) + "&description=" + AllKeys.convertEncodedString(edtComplaint.getText().toString()+"&status=0");
+                                    String url = AllKeys.WEBSITE + "InsertServiceDetail?type=detail&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "&serviceid=" + list_menu.get(position).getMenuid() + "&date=" + AllKeys.convertEncodedString(AllKeys.getDateTime()) + "&description=" + AllKeys.convertEncodedString(edtComplaint.getText().toString() + "&status=0");
                                     Log.d(TAG, "send Complaint : " + url);
                                     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                                         @Override
@@ -332,7 +383,8 @@ public class MenuActivity extends AppCompatActivity {
                         dialog.show();
 
 
-                    } else {
+                    } else
+                    {
 
 
                         final Dialog dialog = new Dialog(MenuActivity.this);
@@ -416,7 +468,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
                                     //String url = AllKeys.WEBSITE + "InsertServiceDetail?type=detail&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "&serviceid=" + list_menu.get(position).getMenuid() + "&date=" + AllKeys.convertEncodedString(AllKeys.getDateTime()) + "&description=" + AllKeys.convertEncodedString(edtComplaint.getText().toString()) + "&emailid=" + AllKeys.convertEncodedString(edtEmail.getText().toString()) + "";
-                                    String url = AllKeys.WEBSITE + "InsertQuotationDetail?type=quotation&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "&serviceid=" + list_menu.get(position).getMenuid() + "&date=" + AllKeys.convertEncodedString(AllKeys.getDateTime()) + "&description=" + AllKeys.convertEncodedString(edtQuotation.getText().toString())+"&status=0";
+                                    String url = AllKeys.WEBSITE + "InsertQuotationDetail?type=quotation&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "&serviceid=" + list_menu.get(position).getMenuid() + "&date=" + AllKeys.convertEncodedString(AllKeys.getDateTime()) + "&description=" + AllKeys.convertEncodedString(edtQuotation.getText().toString()) + "&status=0";
                                     Log.d(TAG, "send Quotation InsertQuotationDetail : " + url);
                                     final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                                         @Override
@@ -500,76 +552,12 @@ public class MenuActivity extends AppCompatActivity {
                         dialog.show();
 
 
-                    }
+                    }*/
 
 
 
 
 
-/*
-                    LayoutInflater inflater = LayoutInflater.from(MenuActivity.this);
-                    View subView = inflater.inflate(R.layout.dialog_complaint, null);
-
-                    *//*TextInputLayout edtComplaintWrapper = (TextInputLayout) subView.findViewById(R.id.edtComplaintWrapper);
-                    EditText edtComplaint = (EditText) subView.findViewById(R.id.edtComplaint);
-                    Button btnSendComplaint = (Button) subView.findViewById(R.id.btnSendComplaint);
-*//*
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
-                    builder.setTitle(list_menu.get(position).getMenuname() + " Complaint");
-                    //builder.setMessage("AlertDialog Message");
-                    builder.setCancelable(false);
-                    builder.setView(subView);
-                    AlertDialog alertDialog = builder.create();
-
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(final DialogInterface dialog, int which) {
-
-                            //dialog.cancel();
-                            // SendComplaintDetailsToServer();
-
-                            showDialog();
-
-
-                            String url = AllKeys.WEBSITE + "";
-                            Log.d(TAG, "send Complaint : " + url);
-                            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-
-
-                                    dialog.cancel();
-                                    dialog.dismiss();
-                                }
-                            }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-
-                                    if (error instanceof ServerError || error instanceof NetworkError) {
-                                        hideDialog();
-                                    } else {
-                                        Toast.makeText(context, "Try again...", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-                            });
-                            MyApplication.getInstance().addToRequestQueue(request);
-
-
-                            hideDialog();
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            dialog.dismiss();
-                            dialog.cancel();
-
-
-                        }
-                    });
-             //       builder.show();*/
 
 
                 } catch (Exception e) {
@@ -589,7 +577,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    private void getQuotationMasterDetailsFromServer(final String serviceid) {
+    private void getQuotationMasterDetailsFromServer(final String serviceid)
+    {
         String url = AllKeys.WEBSITE + "ViewQuotation?type=quotation&serviceid=" + serviceid + "";
         Log.d(TAG, "URL ViewQuotation : " + url);
 
@@ -671,7 +660,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    private void getComplaintMasterDetailsFromServer(final String serviceid) {
+    private void getComplaintMasterDetailsFromServer(final String serviceid)
+    {
         String url = AllKeys.WEBSITE + "ViewComplain?type=complain&serviceid=" + serviceid + "";
         Log.d(TAG, "URL ViewComplain : " + url);
 
@@ -717,7 +707,7 @@ public class MenuActivity extends AppCompatActivity {
                                 sessionManager.setVisitingCharge(response.getString(AllKeys.TAG_RR_VISIT_CHARGE));
                                 userDetails = sessionManager.getSessionDetails();
 
-                                tvVisitCharge.setText("Visting Charge         : " + response.getString(AllKeys.TAG_RR_VISIT_CHARGE));
+                                tvVisitCharge.setText("Visiting Charge         : " + response.getString(AllKeys.TAG_RR_VISIT_CHARGE));
 
                                 list_compalintid.add(c.getString(TAG_COMPLAINT_ID));
                                 list_compalint.add(c.getString(TAG_COMPLAINT_DESCR));

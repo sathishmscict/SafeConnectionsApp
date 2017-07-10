@@ -61,7 +61,7 @@
                     android:tint="@color/white"
                     android:layout_weight="1"
                     android:text="Dashboard"
-                    android:src="@drawable/icon_selected"
+                    android:src="@drawable/icon_selected_enable"
 
 
                     />

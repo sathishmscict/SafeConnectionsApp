@@ -16,15 +16,25 @@
             android:id="@+id/nav_complaints"
             android:icon="@drawable/icon_complaints"
             android:title="My Complaints" />
+
+
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/icon_userlogo"
+            android:visible="false"
             android:title="Profile" />
 
         <item
             android:id="@+id/nav_quotation"
             android:icon="@drawable/icon_quotation"
-            android:title="Quotation" />
+            android:title="My Quotations" />
+
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/icon_orders"
+            android:title="My Orders" />
+
         <item
             android:id="@+id/nav_refer_a_friend"
             android:icon="@drawable/icon_refer_a_friend"

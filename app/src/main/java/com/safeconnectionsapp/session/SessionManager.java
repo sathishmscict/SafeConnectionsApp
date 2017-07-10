@@ -33,6 +33,9 @@ public class SessionManager {
             KEY_RECEIVECODE = "reccode",
             KEY_VERSTATUS = "verification_status";
 
+    public static final String KEY_USER_PINCODE = "userPincode", KEY_USER_CITY = "userCity";
+
+
     public static final String KEY_SHIPPED_DAYS = "ShippedDaya", KEY_CHECKOUT_TYPE = "CheckoutType";
     public static final String KEY_PRODUCT_ID = "ProductId";
 
@@ -101,6 +104,15 @@ public class SessionManager {
         editor.commit();
 
     }
+
+    public void setUserPinocdeAndCity(String strPinocde, String strCity) {
+
+        editor.putString(KEY_USER_PINCODE, strPinocde);
+        editor.putString(KEY_USER_CITY, strCity);
+
+        editor.commit();
+    }
+
     public void setCheckoutType(String checkoutType, String productId) {
 
         editor.putString(KEY_CHECKOUT_TYPE, checkoutType);
@@ -286,6 +298,9 @@ public class SessionManager {
 
         //KEY_FULLNAME="uerfullname",KEY_USERNAME="username",KEY_EMAIL="email",KEY_MOBILE="mobileno",KEY_PHONENO="phoneno",KEY_PASSWORD="password";
         HashMap<String, String> user = new HashMap<String, String>();
+
+        user.put(KEY_USER_PINCODE, pref.getString(KEY_USER_PINCODE, ""));
+        user.put(KEY_USER_CITY, pref.getString(KEY_USER_CITY, ""));
 
         user.put(KEY_CARTITEMS_ID, pref.getString(KEY_CARTITEMS_ID, ""));
 

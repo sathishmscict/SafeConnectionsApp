@@ -232,10 +232,19 @@ public class CheckoutActivity extends AppCompatActivity {
                     //SendOrderDetailsToServer();
                 } else {
 
-                    Dialog dialog = new Dialog(context);
+                    final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.dailog_order_verification);
                     dialog.setCancelable(false);
 
+
+                    TextView tvClose = (TextView)dialog.findViewById(R.id.tvClose);
+                    tvClose.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                            dialog.dismiss();
+                        }
+                    });
                     final TextInputLayout edtOTPWrapper = (TextInputLayout) dialog.findViewById(R.id.edtOTPWrapper);
                     final EditText edtOTP = (EditText) dialog.findViewById(R.id.edtOTP);
                     final TextView txtResendCode = (TextView) dialog.findViewById(R.id.txtResendCode);

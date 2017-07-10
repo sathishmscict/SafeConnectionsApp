@@ -1,60 +1,77 @@
 package com.safeconnectionsapp.pojo;
 
 /**
- * Created by PC2 on 27-Mar-17.
+ * Created by SATHISH on 07-Jul-17.
  */
 
 public class OrderMaster {
 
+    String orderdate , totalamount ,orderid , productname,product_qty , price,image;
 
-    String complaintId, categoryname, complaintdescr, complaintDate, complaintTime;
-
-    public OrderMaster(String complaintId, String categoryname, String complaintdescr, String complaintDate, String complaintTime) {
-        this.complaintId = complaintId;
-        this.categoryname = categoryname;
-        this.complaintdescr = complaintdescr;
-        this.complaintDate = complaintDate;
-        this.complaintTime = complaintTime;
+    public OrderMaster(String orderdate, String totalamount, String orderid, String productname, String product_qty, String price, String image) {
+        this.orderdate = orderdate;
+        this.totalamount = totalamount;
+        this.orderid = orderid;
+        this.productname = productname;
+        this.product_qty = product_qty;
+        this.price = price;
+        this.image = image;
     }
 
-    public String getComplaintId() {
-        return complaintId;
+
+    public String getOrderdate() {
+        return orderdate;
     }
 
-    public void setComplaintId(String complaintId) {
-        this.complaintId = complaintId;
+    public void setOrderdate(String orderdate) {
+        this.orderdate = orderdate;
     }
 
-    public String getCategoryname() {
-        return categoryname;
+    public String getTotalamount() {
+        return totalamount;
     }
 
-    public void setCategoryname(String categoryname) {
-        this.categoryname = categoryname;
+    public void setTotalamount(String totalamount) {
+        this.totalamount = totalamount;
     }
 
-    public String getComplaintdescr() {
-        return complaintdescr;
+    public String getOrderid() {
+        return orderid;
     }
 
-    public void setComplaintdescr(String complaintdescr) {
-        this.complaintdescr = complaintdescr;
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
     }
 
-    public String getComplaintDate() {
-        return complaintDate;
+    public String getProductname() {
+        return productname;
     }
 
-    public void setComplaintDate(String complaintDate) {
-        this.complaintDate = complaintDate;
+    public void setProductname(String productname) {
+        this.productname = productname;
     }
 
-    public String getComplaintTime() {
-        return complaintTime;
+    public String getProduct_qty() {
+        return product_qty;
     }
 
-    public void setComplaintTime(String complaintTime) {
-        this.complaintTime = complaintTime;
+    public void setProduct_qty(String product_qty) {
+        this.product_qty = product_qty;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
-

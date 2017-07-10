@@ -14,12 +14,14 @@
         android:startColor="#96212121"
         android:type="linear" />
 
+<!--
     <gradient
         android:angle="135"
         android:centerColor="#E77843"
         android:endColor="#c7e64a19"
         android:startColor="#96e77843"
         android:type="linear" />
+-->
 
 
 </shape>

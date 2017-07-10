@@ -20,9 +20,8 @@ import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.safeconnectionsapp.R;
-import com.safeconnectionsapp.adapter.ComplaintsDisplayRecyclerViewAdapter;
+import com.safeconnectionsapp.adapter.QuotationDisplayRecyclerViewAdapter;
 import com.safeconnectionsapp.app.MyApplication;
-
 import com.safeconnectionsapp.helper.AllKeys;
 import com.safeconnectionsapp.pojo.ComplaintAndQuotaionMaster;
 import com.safeconnectionsapp.session.SessionManager;
@@ -36,7 +35,7 @@ import java.util.HashMap;
 import dmax.dialog.SpotsDialog;
 
 
-public class FragmentComplaints extends android.support.v4.app.Fragment {
+public class FragmentQuotations extends android.support.v4.app.Fragment {
 
 
     private Context context = getActivity();
@@ -47,15 +46,15 @@ public class FragmentComplaints extends android.support.v4.app.Fragment {
     private HashMap<String, String> userDetails = new HashMap<String, String>();
 
 
-    private String TAG = FragmentComplaints.class.getSimpleName();
+    private String TAG = FragmentQuotations.class.getSimpleName();
     private SpotsDialog pDialog;
 
     private RecyclerView recyclerview_orders;
-    private ComplaintsDisplayRecyclerViewAdapter adapter;
+    private QuotationDisplayRecyclerViewAdapter adapter;
     private ArrayList<ComplaintAndQuotaionMaster> list_OrderData = new ArrayList<ComplaintAndQuotaionMaster>();
 
 
-    public FragmentComplaints() {
+    public FragmentQuotations() {
         // Required empty public constructor
     }
 
@@ -121,7 +120,7 @@ public class FragmentComplaints extends android.support.v4.app.Fragment {
 
 
     private void getAllOrderDetailsFromServer() {
-        String url_getOrders = AllKeys.WEBSITE + "ViewServiceDetail?type=servicedetail&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "";
+        String url_getOrders = AllKeys.WEBSITE + "ViewQuotationDetail?type=quotationdetail&userid=" + userDetails.get(SessionManager.KEY_USER_ID) + "";
         Log.d(TAG, "URL ViewServiceDetail : " + url_getOrders);
         JsonObjectRequest str_getOrders = new JsonObjectRequest(Request.Method.GET, url_getOrders, null, new Response.Listener<JSONObject>() {
             @Override
@@ -150,12 +149,12 @@ public class FragmentComplaints extends android.support.v4.app.Fragment {
 
 
                                 //  ComplaintAndQuotaionMaster(String complaintId, String categoryname, String complaintdescr, String complaintDate, String complaintTime) {
-                                ComplaintAndQuotaionMaster om = new ComplaintAndQuotaionMaster(c.getString(AllKeys.TAG_COMPLAINT_ID), c.getString(AllKeys.TAG_COMPLAINT_CATEGORYNAME), c.getString(AllKeys.TAG_DESCRIPTION), c.getString(AllKeys.TAG_DATE), c.getString(AllKeys.TAG_TIME));
+                                ComplaintAndQuotaionMaster om = new ComplaintAndQuotaionMaster(c.getString(AllKeys.TAG_QUOTATION_ID),"", c.getString(AllKeys.TAG_DESCRIPTION), c.getString(AllKeys.TAG_DATE), c.getString(AllKeys.TAG_TIME));
 
                                 list_OrderData.add(om);
 
                             }
-                            adapter = new ComplaintsDisplayRecyclerViewAdapter(getActivity(), list_OrderData);
+                            adapter = new QuotationDisplayRecyclerViewAdapter(getActivity(), list_OrderData);
                             recyclerview_orders.setAdapter(adapter);
                         } else {
                             Toast.makeText(getActivity(), "No Orders Found", Toast.LENGTH_SHORT).show();

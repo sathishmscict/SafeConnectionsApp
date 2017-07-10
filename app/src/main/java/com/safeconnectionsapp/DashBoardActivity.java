@@ -31,7 +31,9 @@ import com.android.volley.VolleyError;
 import com.safeconnectionsapp.Model.UNotificationResponse;
 import com.safeconnectionsapp.app.MyApplication;
 import com.safeconnectionsapp.fragments.FragmentComplaints;
+import com.safeconnectionsapp.fragments.FragmentOrders;
 import com.safeconnectionsapp.fragments.FragmentProfile;
+import com.safeconnectionsapp.fragments.FragmentQuotations;
 import com.safeconnectionsapp.fragments.FragmentReferalList;
 import com.safeconnectionsapp.fragments.HomeFragment;
 import com.safeconnectionsapp.fragments.InviteFriendsFragment;
@@ -166,10 +168,9 @@ public class DashBoardActivity extends AppCompatActivity
         imgProfilePic = (ImageView) headerLayout.findViewById(R.id.imgProfilePic);
 
 
-        tvUserName.setText(userDetails.get(SessionManager.KEY_USER_NAME));
-        tvEmail.setText(userDetails.get(SessionManager.KEY_USER_EMAIL));
 
-        //SetUserProfilePictireFromBase64EnodedString();
+
+        SetUserProfilePictireFromBase64EnodedString();
 
         imgProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,7 +212,13 @@ public class DashBoardActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);*/
 
-        setupFragment(null, getString(R.string.app_name));
+
+        if (userDetails.get(SessionManager.KEY_USER_EMAIL).equals("") || userDetails.get(SessionManager.KEY_USER_ADDRESS).equals("") || userDetails.get(SessionManager.KEY_USER_NAME).equals("")) {
+            setupFragment(new FragmentProfile(), "Profile");
+        } else {
+            setupFragment(null, getString(R.string.app_name));
+        }
+
     }
 
     public void setupFragment(Fragment fragment, String title) {
@@ -244,6 +251,10 @@ public class DashBoardActivity extends AppCompatActivity
 
     private void SetUserProfilePictireFromBase64EnodedString() {
         showDialog();
+
+        tvUserName.setText(userDetails.get(SessionManager.KEY_USER_NAME));
+        tvEmail.setText(userDetails.get(SessionManager.KEY_USER_EMAIL));
+
         try {
             userDetails = sessionManager.getSessionDetails();
             String myBase64Image = userDetails.get(SessionManager.KEY_ENODEDED_STRING);
@@ -405,6 +416,10 @@ public class DashBoardActivity extends AppCompatActivity
             setupFragment(new FragmentComplaints(), "Complaints");
 
         } else if (id == R.id.nav_quotation) {
+            setupFragment(new FragmentQuotations(), "Quotations");
+
+        } else if (id == R.id.nav_orders) {
+            setupFragment(new FragmentOrders(), "Orders");
 
         } else if (id == R.id.nav_profile) {
             setupFragment(new FragmentProfile(), "Profile");

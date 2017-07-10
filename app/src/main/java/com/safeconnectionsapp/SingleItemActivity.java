@@ -2,6 +2,7 @@ package com.safeconnectionsapp;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -13,8 +14,10 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -31,6 +34,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -145,6 +149,14 @@ public class SingleItemActivity extends AppCompatActivity implements SwipeRefres
 
 
     private ProductImagesRecyclerViewAdapter_New adapter_ProductImages;
+    private TextInputLayout edtPincodeWrapper;
+    private EditText edtPincode;
+    private TextView txvPincode;
+    private LinearLayout llBeforePincode;
+    private LinearLayout llAfterPincode;
+    private Button btnCheckPincode;
+    private Button btnCheckPincodeChange;
+    private String CITY_NAME = "";
 
 
     @Override
@@ -216,6 +228,20 @@ public class SingleItemActivity extends AppCompatActivity implements SwipeRefres
         btnAddToWishList = (TextView) findViewById(R.id.txtWishLiast);
 
 
+        btnCheckPincode = (Button) findViewById(R.id.btnCheckPincode);
+        btnCheckPincodeChange = (Button) findViewById(R.id.btnCheckPincodeChange);
+
+        llBeforePincode = (LinearLayout) findViewById(R.id.llBeforePincode);
+        llAfterPincode = (LinearLayout) findViewById(R.id.llAfterPincode);
+
+        edtPincodeWrapper = (TextInputLayout) findViewById(R.id.edtPincodeWrapper);
+        edtPincode = (EditText) findViewById(R.id.edtPincode);
+
+        edtPincode.setText(userDetails.get(SessionManager.KEY_USER_PINCODE));
+
+        //edtPincodeWrapper2 = (TextInputLayout) findViewById(R.id.edtPincodeWrapper2);
+        txvPincode = (TextView) findViewById(R.id.txvPincode);
+
         coordinateLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         crdSize = (CardView) findViewById(R.id.crdSize);
@@ -231,6 +257,62 @@ public class SingleItemActivity extends AppCompatActivity implements SwipeRefres
         txtDescrInfo = (TextView) findViewById(R.id.txtDescrInfo);
 
         txtDescrInfo.setVisibility(View.VISIBLE);
+
+
+        btnCheckPincodeChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPincodeDisable();
+            }
+        });
+        btnCheckPincode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (edtPincode.getText().toString().equals("")) {
+                    edtPincodeWrapper.setErrorEnabled(true);
+                    edtPincodeWrapper.setError("Enter Pincode");
+                    setPincodeDisable();
+
+
+                } else {
+                    edtPincodeWrapper.setErrorEnabled(false);
+
+                    if (btnCheckPincode.getText().equals("change")) {
+                        /*InputFilter[] FilterArray = new InputFilter[1];
+                        FilterArray[0] = new InputFilter.LengthFilter(6);
+                        edtPincode.setFilters(FilterArray);*/
+
+                        txvPincode.setText(Html.fromHtml("Delivers to " + "<b> " + edtPincode.getText().toString() + "," + CITY_NAME + "</b>"));
+                        setPincodeEnable();
+
+
+                    } else {
+
+
+
+
+                        if (userDetails.get(SessionManager.KEY_USER_PINCODE).equals("")) {
+
+                            getCityNameByPincode();
+
+
+                        } else {
+
+                            getCityNameByPincode();
+
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+        });
+
 
 /*
         txtDescr.setOnClickListener(new View.OnClickListener() {
@@ -305,7 +387,6 @@ public class SingleItemActivity extends AppCompatActivity implements SwipeRefres
 
 
                         if (btnAddToCart.getText().toString().toLowerCase().equals("go to cart")) {
-/*
                             sessionmanager.setActivityName(TAG);
 
                                 Intent ii = new Intent(context, CheckoutActivity.class);
@@ -313,21 +394,61 @@ public class SingleItemActivity extends AppCompatActivity implements SwipeRefres
                                 sessionmanager.setActivityName(userDetails.get(SessionManager.KEY_ACTIVITY_NAME));
                                 sessionmanager.setCheckoutType("multiple", userDetails.get(SessionManager.KEY_PRODUCT_ID));
                                 startActivity(ii);
-                                finish();*/
-
-                            Toast.makeText(context, "Checkout Activity", Toast.LENGTH_SHORT).show();
-
-                        } else {
-
-                            if (userDetails.get(SessionManager.KEY_USER_ID).equals("0")) {
-                                sessionmanager.setNewUserSession("SingleItemActivity");
-                                Intent intent = new Intent(context, LoginActivity.class);
-                                startActivity(intent);
                                 finish();
 
-                            } else {
-                                manageAddToCartDetailsToServer(userDetails.get(SessionManager.KEY_PRODUCT_ID), QUANTITY, "insertcart");
+                         //   Toast.makeText(context, "Checkout Activity", Toast.LENGTH_SHORT).show();
+
+                        } else
+                            {
+
+                            if(Is_Pincode_Available == true)
+                            {
+
+
+                                if (userDetails.get(SessionManager.KEY_USER_ID).equals("0"))
+                                {
+                                    sessionmanager.setNewUserSession("SingleItemActivity");
+                                    Intent intent = new Intent(context, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+
+                                } else {
+                                    manageAddToCartDetailsToServer(userDetails.get(SessionManager.KEY_PRODUCT_ID), QUANTITY, "insertcart");
+                                }
+
                             }
+                            else
+                            {
+                                setPincodeDisable();
+
+
+                                txvPincode.setFocusable(true);
+                                txvPincode.setText("Invalid Pincode Provider");
+
+                                Snackbar.make(coordinateLayout, "Invalid Pincode Provider", Snackbar.LENGTH_SHORT).show();
+
+
+                                if (txvPincode.getText().toString().equals("Invalid Pincode Provider")) {
+                                    shakeInit(llAfterPincode);
+                                    llAfterPincode.requestFocus();
+
+                                } else {
+                                    if (edtPincode.getText().toString().equals("")) {
+                                        shakeInit(llBeforePincode);
+                                        llBeforePincode.requestFocus();
+                                    } else {
+                                        shakeInit(llAfterPincode);
+                                        llAfterPincode.requestFocus();
+                                    }
+
+                                }
+
+
+                                setPincodeEnable();
+
+
+                            }
+
 
                         }
 
@@ -439,9 +560,159 @@ public class SingleItemActivity extends AppCompatActivity implements SwipeRefres
 
         hideNoInternetUI();
 
+        getCityNameByPincode();
+
 
     }
     //onCreate Completed
+
+    private void setPincodeDisable() {
+
+        edtPincode.setVisibility(View.VISIBLE);
+        edtPincodeWrapper.setVisibility(View.VISIBLE);
+
+        btnCheckPincode.setVisibility(View.VISIBLE);
+        btnCheckPincodeChange.setVisibility(View.GONE);
+
+        txvPincode.setVisibility(View.GONE);
+
+    }
+
+    private void setPincodeEnable() {
+        edtPincode.setVisibility(View.GONE);
+        edtPincodeWrapper.setVisibility(View.GONE);
+        btnCheckPincode.setVisibility(View.GONE);
+
+        txvPincode.setVisibility(View.VISIBLE);
+        btnCheckPincodeChange.setVisibility(View.VISIBLE);
+
+    }
+
+
+
+    private void getCityNameByPincode()
+    {
+        showDialog();
+        String url_getCityNameByPincode = AllKeys.URL_CITYNAME_BY_PINCODE_CHECK + "&pin=" + edtPincode.getText().toString() + "";
+        Log.d(TAG, "URL GetCityNameByPincode :" + url_getCityNameByPincode);
+        StringRequest str_getCityNameByPincode = new StringRequest(Request.Method.GET, url_getCityNameByPincode, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.contains("City"))
+                {
+                    try {
+                        response = "[" + response + "]";
+                        response = AllKeys.convertToJsonFormat(response);
+                        JSONObject obj = new JSONObject(response);
+                        JSONArray arr = obj.getJSONArray("data");
+
+                        for (int j = 0; j < arr.length(); j++)
+                        {
+                            try {
+
+                                JSONObject objData = arr.getJSONObject(j);
+
+                                JSONArray arrData = objData.getJSONArray("Data");
+                                for (int i = 0; i < arrData.length(); i++) {
+
+                                    CITY_NAME = arrData.getJSONObject(i).getString("City");
+
+
+                                    sessionmanager.setUserPinocdeAndCity(edtPincode.getText().toString(), CITY_NAME);
+
+
+                                }
+
+                                if(CITY_NAME.toLowerCase().equals("surat"))
+                                {
+
+                                    Is_Pincode_Available = true;
+
+
+                                    txvPincode.setText(Html.fromHtml("Delivers to " + "<b> " + edtPincode.getText().toString() + "," + CITY_NAME + "</b>"));
+
+                                    setPincodeEnable();
+
+
+                                }
+                                else
+                                {
+
+                                    Is_Pincode_Available = false;
+
+                                    hideDialog();
+
+                                    AlertDialog.Builder builder =new AlertDialog.Builder(SingleItemActivity.this);
+                                    builder.setTitle("Product Availability");
+                                    builder.setMessage("Sorry, Safe Connexions Shop,Repair and Maintenance Services currently located in Surat only.");
+                                    builder.setCancelable(true);
+                                    builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            dialog.cancel();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    builder.show();
+                                  //  edtPincodeWrapper.setErrorEnabled(true);
+                                   // edtPincodeWrapper.setError("Invalid Pincode Provided");
+
+
+                                    setPincodeDisable();
+
+
+
+
+
+
+                                }
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+
+
+                        //Check e-vahan API
+                       // checkItemAvailabilityOfUserLocation();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } else {
+                    setPincodeEnable();
+                    txvPincode.setText(Html.fromHtml("Pincode " + edtPincode.getText().toString() + " is invalid"));
+
+
+                }
+                hideDialog();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof ServerError) {
+                    hideDialog();
+                } else {
+                    getCityNameByPincode();
+                }
+
+
+            }
+        });
+        MyApplication.getInstance().addToRequestQueue(str_getCityNameByPincode);
+
+    }
+
 
     public class ProductImagesRecyclerViewAdapter_New extends RecyclerView.Adapter<ProductImagesRecyclerViewAdapter_New.MyViewHolder> {
 

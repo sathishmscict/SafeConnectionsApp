@@ -24,6 +24,11 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class AllKeys {
+
+
+    public static final String URL_CITYNAME_BY_PINCODE_CHECK = "https://www.whizapi.com/api/v2/util/ui/in/indian-city-by-postal-code?project-app-key=p75dteec5dvdymhkis18c5lk";
+
+
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern
             .compile("[a-zA-Z0-9+._%-+]{1,256}" + "@"
                     + "[a-zA-Z0-9][a-zA-Z0-9-]{0,64}" + "(" + "."
@@ -84,7 +89,7 @@ public class AllKeys {
 
 
     public static final String TAG_PRODUCT_QUANTITY= "product_qty";
-    public static final String TAG_DATE= "date";
+    //public static final String TAG_DATE= "date";
 
 
 
@@ -131,10 +136,20 @@ public class AllKeys {
 
     //Complaint Related Data
     public static final String TAG_COMPLAINT_ID = "servicedetailid";
-    public static final String TAG_COMPLAINT_DATE = "date";
-    public static final String TAG_COMPLAINT_TIME = "time";
-    public static final String TAG_COMPLAINT_DESCRIPTION = "description";
+    public static final String TAG_DATE = "date";
+    public static final String TAG_TIME = "time";
+    public static final String TAG_DESCRIPTION = "description";
     public static final String TAG_COMPLAINT_CATEGORYNAME = "service";
+
+
+    //Quotation related data
+    public static final String TAG_QUOTATION_ID="quotationdetailid";
+    public static final String TAG_QUOTATION_SERVICE="service";
+    /*public static final String TAG_="date";
+    public static final String TAG_="time";
+    public static final String TAG_="description";*/
+
+
 
     //Referal Rewards Related DAta
     public static final String ARRAY_REWARDS="Rewards";
@@ -145,6 +160,14 @@ public class AllKeys {
     public static final String TAG_RR_REFERRAL_LIMIT = "REFERRAL_LIMIT";
     public static final String TAG_RR_KEY = "KEY";
     public static final String TAG_RR_VISIT_CHARGE = "VISIT_CHARGE";
+
+    //Order Realted keys
+    public static final String TAG_ORDER_ID="OrderId";
+    public static final String TAG_TOTAL_AMT="totalAmt";
+
+
+
+
 
 
 

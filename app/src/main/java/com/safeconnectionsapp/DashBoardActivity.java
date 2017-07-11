@@ -3,7 +3,9 @@ package com.safeconnectionsapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -65,6 +67,10 @@ public class DashBoardActivity extends AppCompatActivity
     private TextView tvEmail;
     private ImageView imgProfilePic;
     private Menu menu;
+
+    // Asyntask
+    AsyncTask<Void, Void, Void> mRegisterTask;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -351,13 +357,44 @@ public class DashBoardActivity extends AppCompatActivity
 
     }
 
+
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+
+        if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        try {
+            pDialog.cancel();
+            pDialog.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

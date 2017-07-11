@@ -159,6 +159,7 @@ public class AddQuotationActivity extends AppCompatActivity {
 
     private void getQuotationMasterDetailsFromServer(final String serviceid)
     {
+        showDialog();
         String url = AllKeys.WEBSITE + "ViewQuotation?type=quotation&serviceid=" + serviceid + "";
         Log.d(TAG, "URL ViewQuotation : " + url);
 
@@ -171,7 +172,8 @@ public class AddQuotationActivity extends AppCompatActivity {
 
                 Log.d(TAG, " ViewQuotation Response  : " + response.toString());
 
-                try {
+                try
+                {
                     String str_error = response.getString(AllKeys.TAG_MESSAGE);
                     String str_error_original = response.getString(AllKeys.TAG_ERROR_ORIGINAL);
                     boolean error_status = response.getBoolean(AllKeys.TAG_ERROR_STATUS);
@@ -218,7 +220,9 @@ public class AddQuotationActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    hideDialog();
                 }
+                hideDialog();
 
             }
         }, new Response.ErrorListener() {
@@ -287,7 +291,7 @@ public class AddQuotationActivity extends AppCompatActivity {
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(AddQuotationActivity.this);
                                 builder.setTitle("Quotation Info");
-                                builder.setMessage(userDetails.get(SessionManager.KEY_CATEGORY_NAME) + " quotation request has been submited.we will contact to you with in a 24 hours.\nThank you ,for using  Safe Conncetions services.");
+                                builder.setMessage(userDetails.get(SessionManager.KEY_CATEGORY_NAME) + " quotation request has been submited.we will contact to you within 24 hours.\nThank you ,for using  Safe Connexions services.");
                                 builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -770,11 +774,22 @@ public class AddQuotationActivity extends AppCompatActivity {
             try {
                 //Glide.with(_context).load(list_categoty.get(position).getImageurl()).placeholder(R.drawable.app_logo).error(R.drawable.app_logo).crossFade(R.anim.fadein, 2000).override(500, 500).into(holder.ivCategory);
 
-                Picasso.with(_context)
-                        .load(list_complatintandQuotation.get(position).getImageurl())
-                        .placeholder(R.drawable.app_logo)
-                        .error(R.drawable.app_logo)
-                        .into(holder.ivImage);
+                if(!list_complatintandQuotation.get(position).getImageurl().isEmpty())
+                {
+
+                    Picasso.with(_context)
+                            .load(list_complatintandQuotation.get(position).getImageurl())
+                            .placeholder(R.drawable.app_logo)
+                            .error(R.drawable.app_logo)
+                            .into(holder.ivImage);
+
+                }
+                else
+                {
+                    holder.ivImage.setImageDrawable(getResources().getDrawable(R.drawable.app_logo));
+
+                }
+
 
 
             } catch (Exception e) {

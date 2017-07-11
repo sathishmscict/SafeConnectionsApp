@@ -234,7 +234,7 @@ public class AddComplaintActivity extends AppCompatActivity {
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(AddComplaintActivity.this);
                                 builder.setTitle("Complaint Info");
-                                builder.setMessage(userDetails.get(SessionManager.KEY_CATEGORY_NAME) + " Complaint has been submited.we will contact to you with in a 24 hours.\nThank you ,for using  Safe Conncetions services.");
+                                builder.setMessage(userDetails.get(SessionManager.KEY_CATEGORY_NAME) + " Complaint has been submited.we will contact to you within 24 hours.\nThank you ,for using  Safe Connexions services.");
                                 builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -284,6 +284,8 @@ public class AddComplaintActivity extends AppCompatActivity {
 
     private void getComplaintMasterDetailsFromServer(final String serviceid)
     {
+
+        showDialog();
         String url = AllKeys.WEBSITE + "ViewComplain?type=complain&serviceid=" + serviceid + "";
         Log.d(TAG, "URL ViewComplain : " + url);
 
@@ -295,7 +297,8 @@ public class AddComplaintActivity extends AppCompatActivity {
 
                 Log.d(TAG, " ViewComplain Response  : " + response.toString());
 
-                try {
+                try
+                {
                     String str_error = response.getString(AllKeys.TAG_MESSAGE);
                     String str_error_original = response.getString(AllKeys.TAG_ERROR_ORIGINAL);
                     boolean error_status = response.getBoolean(AllKeys.TAG_ERROR_STATUS);
@@ -338,7 +341,9 @@ public class AddComplaintActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    hideDialog();
                 }
+                hideDialog();
 
             }
         }, new Response.ErrorListener() {
@@ -783,11 +788,19 @@ public class AddComplaintActivity extends AppCompatActivity {
             try {
                 //Glide.with(_context).load(list_categoty.get(position).getImageurl()).placeholder(R.drawable.app_logo).error(R.drawable.app_logo).crossFade(R.anim.fadein, 2000).override(500, 500).into(holder.ivCategory);
 
-                Picasso.with(_context)
-                        .load(list_complatintandQuotation.get(position).getImageurl())
-                        .placeholder(R.drawable.app_logo)
-                        .error(R.drawable.app_logo)
-                        .into(holder.ivImage);
+                if(!list_complatintandQuotation.get(position).getImageurl().isEmpty())
+                {
+                    Picasso.with(_context)
+                            .load(list_complatintandQuotation.get(position).getImageurl())
+                            .placeholder(R.drawable.app_logo)
+                            .error(R.drawable.app_logo)
+                            .into(holder.ivImage);
+
+
+                }
+                else {
+                    holder.ivImage.setImageDrawable(getResources().getDrawable(R.drawable.app_logo));
+                }
 
 
             } catch (Exception e) {

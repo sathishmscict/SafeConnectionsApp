@@ -206,7 +206,15 @@ public class MenuActivity extends AppCompatActivity {
                     for (int i = 0; i < list_menu.size(); i++) {
                         list_menu.get(i).setSelectionstatus(false);
                     }
-                    list_menu.get(position).setSelectionstatus(true);
+                    try {
+                        if(list_menu.size() !=0)
+                        {
+
+                        list_menu.get(position).setSelectionstatus(true);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     btnConfirm.setVisibility(View.VISIBLE);
                     adapter.notifyDataSetChanged();
 

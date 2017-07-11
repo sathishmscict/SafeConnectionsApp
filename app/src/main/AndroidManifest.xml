@@ -28,6 +28,7 @@
 
         <activity
             android:name=".SplashScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,22 +38,27 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RequestQuotationActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_request_quotation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RequestComplaintActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_request_repairing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
+
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VerificationActivity"
+
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -77,6 +83,7 @@
 
         <activity
             android:name=".SingleItemActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OrderSuccessfullActivity"
@@ -85,31 +92,39 @@
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".InviteCodeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".DashBoardActivity"
             android:label="@string/title_activity_dash_board"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CategoryAcitivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CheckoutActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ItemDisplayActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddComplaintActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_add_complaint"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddQuotationActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_add_quotation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

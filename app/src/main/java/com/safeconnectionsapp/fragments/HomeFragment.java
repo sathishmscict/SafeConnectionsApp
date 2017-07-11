@@ -100,6 +100,10 @@ public class HomeFragment extends Fragment{
         userDetails = sessionManager.getSessionDetails();
 
 
+
+        pDialog =  new SpotsDialog(getActivity());
+        pDialog.setCancelable(false);
+
         mDemoSlider = (SliderLayout) rootView.findViewById(R.id.final_slider1);
 
         llQuotation = (LinearLayout) rootView.findViewById(R.id.llQuotation);
@@ -339,8 +343,17 @@ public class HomeFragment extends Fragment{
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
-
+        try {
+            pDialog.cancel();
+            pDialog.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Produc Review Related Pojo Class

@@ -360,7 +360,7 @@
                                                     android:hint="Verification code"
 
                                                     android:inputType="numberSigned"
-                                                    android:maxLength="10"
+                                                    android:maxLength="4"
                                                     android:minLines="1" />
 
                                             </android.support.design.widget.TextInputLayout>

@@ -119,15 +119,7 @@ public class CategoryAcitivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
 
-/*
 
-                sessionmanager.setCategoryTypeAndIdDetails(String.valueOf(list_cateogry.get(position).getCategoryid()) , list_cateogry.get(position).getCategoryname());
-
-
-                Intent intent = new Intent(context, ItemDisplayActivity.class);
-                startActivity(intent);
-                finish();
-*/
 
 
                 sessionmanager.setCategoryTypeAndIdDetails(String.valueOf(list_cateogry.get(position).getCategoryid()), list_cateogry.get(position).getCategoryname(), "category");

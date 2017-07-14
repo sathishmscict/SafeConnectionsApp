@@ -332,6 +332,7 @@ public class HomeFragment extends Fragment{
 
     }
 
+
     public void hideDialog() {
         try {
             if (pDialog.isShowing()) {

@@ -1466,12 +1466,12 @@ public class SingleItemActivity extends AppCompatActivity implements SwipeRefres
         } else if (item.getItemId() == R.id.menu_search) {
 
 
-         /*   Intent intent = new Intent(context, SearchActivity.class);
+            Intent intent = new Intent(context, SearchActivity.class);
             intent.putExtra("ActivityName", TAG);
             startActivity(intent);
-            finish();*/
+            finish();
 
-            Toast.makeText(context, "Search Activity", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, "Search Activity", Toast.LENGTH_SHORT).show();
 
         }
 

@@ -52,6 +52,13 @@
             android:label="@string/title_activity_request_repairing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".SearchActivity"
+
+            android:theme="@style/AppThemeSearchBar"
+
+            />
+
+        <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
 
@@ -72,6 +79,9 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+
+
 
         <receiver
             android:name=".helper.SmsBroadcastReceiver"

@@ -7,7 +7,7 @@
         android:fillColor="@color/colorPrimaryDark"
         android:pathData="M252.1,252.1m-252.1,0a252.1,252.1 0,1 1,504.1 0a252.1,252.1 0,1 1,-504.1 0" />
     <path
-        android:fillColor="@color/colorAccent"
+        android:fillColor="@color/colorPrimary"
         android:pathData="M463.2,114.6L240.2,345.4l0.4,24.8h10.2l241.4,-194.6C485.2,154 475.4,133.1 463.2,114.6z" />
     <path
         android:fillColor="#F2F1EF"

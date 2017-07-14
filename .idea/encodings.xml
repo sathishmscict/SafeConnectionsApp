@@ -3,12 +3,14 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/CheckoutActivity.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/ItemDisplayActivity.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/SearchActivity.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/SingleItemActivity.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/adapter/NewProductsRecyclerViewAdapter.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/animation/FlipAnimation.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/animation/PulseAnimation.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/animation/RotateAnimation.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/animation/ShakeAnimation.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/databinding/ActivityMainBinding.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/fragments/FragmentProfile.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/helper/AllKeys.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/safeconnectionsapp/helper/BadgeDrawable.java" charset="ISO-8859-1" />
@@ -45,6 +47,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/content_checkout.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/content_item_display.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/content_order_successfull.xml" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/content_search.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/content_single_item.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_nonetwork.xml" charset="ISO-8859-1" />

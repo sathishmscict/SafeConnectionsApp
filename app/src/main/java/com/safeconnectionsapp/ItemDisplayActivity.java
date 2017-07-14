@@ -1270,10 +1270,10 @@ public class ItemDisplayActivity extends AppCompatActivity implements SwipeRefre
 
         } else if (item.getItemId() == R.id.menu_search) {
             sessionmanager.setActivityName(TAG);
-            /*Intent intent = new Intent(context, SearchActivity.class);
+            Intent intent = new Intent(context, SearchActivity.class);
             intent.putExtra("ActivityName", TAG);
             startActivity(intent);
-            finish();*/
+            finish();
 
             //Toast.makeText(context, "Search Activity", Toast.LENGTH_SHORT).show();
 
